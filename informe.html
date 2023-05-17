@@ -695,72 +695,9 @@ apply</p>
 ##            63         37465             0          8996            63 
 ##      region_1      region_2      variedad          vina titulo_resena 
 ##         21247         79460             1             0             0</code></pre>
-<p>¿Hay diferencias? Si existen diferencias. Donde más datos faltantes
-hay es en la variable ‘nombre’ y ‘region_1’.</p>
-<p>Con la función sum(is.na()) puedo obtener la cantidad de datos
-faltantes por cada variable. Pruebo con las variables pais y nombre.</p>
-<pre class="r"><code>sum(is.na(vinos$pais))</code></pre>
-<pre><code>## [1] 63</code></pre>
-<pre class="r"><code>sum(is.na(vinos$nombre))</code></pre>
-<pre><code>## [1] 37465</code></pre>
-<p>-Cantidad de observaciones por la variable PUNTOS, ordenado de forma
-decreciente</p>
-<pre class="r"><code>vinos|&gt;
-group_by(puntos)|&gt;
-  summarise(n=n()) |&gt;
- arrange(desc(puntos))</code></pre>
-<pre><code>## # A tibble: 21 × 2
-##    puntos     n
-##     &lt;dbl&gt; &lt;int&gt;
-##  1    100    19
-##  2     99    33
-##  3     98    77
-##  4     97   229
-##  5     96   523
-##  6     95  1535
-##  7     94  3758
-##  8     93  6489
-##  9     92  9613
-## 10     91 11359
-## # ℹ 11 more rows</code></pre>
-<ul>
-<li>Cantidad de observaciones por PAIS, ordenado en forma decreciente
-para saber que país tiene más observaciones.</li>
-</ul>
-<pre class="r"><code>vinos|&gt;
-group_by(pais)|&gt;
-  summarise(n=n())|&gt;
-  arrange(desc(n))</code></pre>
-<pre><code>## # A tibble: 44 × 2
-##    pais               n
-##    &lt;chr&gt;          &lt;int&gt;
-##  1 Estados Unidos 54504
-##  2 Francia        22093
-##  3 Italia         19540
-##  4 España          6645
-##  5 Portugal        5691
-##  6 Chile           4472
-##  7 Argentina       3800
-##  8 Austria         3345
-##  9 Australia       2329
-## 10 Alemania        2165
-## # ℹ 34 more rows</code></pre>
 </div>
 <div id="hipótesis" class="section level2">
 <h2>Hipótesis</h2>
-<p>Traten de que sean hipótesis o preguntas que relacionen 2 o más
-variables. Por ejemplo, “¿Cuál es el mes con más turistas en una
-región?” no es una pregunta intersante, pero “Existe una relación entre
-la cantidad de visitas y la cantidad de hoteles en una región” es una
-hipótesis más jugosa que apunta a la relación entre varias variables y a
-un fenómeno subyacente que puede tener implicancia y aplicaciones.</p>
-<p>No tienen que responder estas preguntas en esta entrega.</p>
-<p>“Existe relación entre el precio del vino y la puntuación?”</p>
-<p>“Existe relación entre el país donde proviene el vino y el tipo de
-uva(variedad)?”</p>
-<p>“Existe relación entre el tipo de uva(variedad) y el precio?”</p>
-<p>” Indicar el nro de vinos que fueron fabricados a partir de la misma
-viña y que presenten una puntuacion superior a 90?”</p>
 </div>
 
 

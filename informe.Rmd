@@ -252,8 +252,6 @@ vinos|>
 group_by(titulo_resena)|>
   summarise(n=n())
 ```
-
-
 Definición valores faltantes en R,se entiende valores que debieron haberse registrado, pero no lo fueron. R almacena los valores faltantes como NA, lo que significa Not Available
 
 Primero preguntamos ¿Hay valores faltantes?
@@ -265,6 +263,7 @@ Obtengo los valores faltantes de toda la tabla vinos
 
 ```{r}
 sum(is.na(vinos))
+
 ```
 
 Obtengo los valores faltantes para cada variable con la función apply
@@ -272,52 +271,7 @@ Obtengo los valores faltantes para cada variable con la función apply
 ```{r}
 apply(X = is.na(vinos), MARGIN = 2, FUN = sum)
 ```
- ¿Hay diferencias? Si existen diferencias. Donde más datos faltantes hay es en la variable 'nombre' y 'region_1'.
-
-
-Con la función sum(is.na()) puedo obtener la cantidad de datos faltantes por cada variable. Pruebo con las variables pais y nombre.
-
-```{r}
-sum(is.na(vinos$pais))
-```
-```{r}
-sum(is.na(vinos$nombre))
-
-```
-
--Cantidad de observaciones por la variable PUNTOS, ordenado de forma decreciente
-
-
-
-```{r}
-vinos|>
-group_by(puntos)|>
-  summarise(n=n()) |>
- arrange(desc(puntos))
-
-```
-
-- Cantidad de observaciones por PAIS, ordenado en forma decreciente para saber que país tiene más observaciones.
-
-```{r}
-vinos|>
-group_by(pais)|>
-  summarise(n=n())|>
-  arrange(desc(n))
-```
 
 ## Hipótesis
 
-Traten de que sean hipótesis o preguntas que relacionen 2 o más variables. Por ejemplo, "¿Cuál es el mes con más turistas en una región?" no es una pregunta intersante, pero "Existe una relación entre la cantidad de visitas y la cantidad de hoteles en una región" es una hipótesis más jugosa que apunta a la relación entre varias variables y a un fenómeno subyacente que puede tener implicancia y aplicaciones.
 
-No tienen que responder estas preguntas en esta entrega.
-
-
-"Existe relación entre el precio del vino y la puntuación?"
-
-"Existe relación entre el país donde proviene el vino y el tipo de uva(variedad)?"
-
-"Existe relación entre el tipo de uva(variedad) y el precio?"
-
-" Indicar el nro de vinos que fueron fabricados a partir de la misma viña y que 
-presenten una puntuacion superior a 90?"
