@@ -160,6 +160,99 @@ summarise(vinos, Valor_min = min(puntos,na.rm = TRUE))
 
 NOTA IMPORTANTE: Solo se pudo tomar 2 variables debido a que son las unicas numericas!!!!
 
+-   ¿Hay alguna anomalía que sugiera que hay datos incorrectos? Valores imposibles (como valores negativos en una variable que sólo puede ser positiva) o poco creíbles.
+-   ¿Cuántas observaciones hay por cada grupo? ¿Cuántos valores faltantes? ¿Hay diferencias?
+
+
+-Cantidad de observaciones por la variable PAIS
+
+```{r}
+vinos|>
+group_by(pais)|>
+  summarise(n=n())
+```
+
+
+- Cantidad de observaciones por la variable NOMBRE
+```{r}
+vinos|>
+group_by(nombre)|>
+  summarise(n=n())
+```
+
+
+-Cantidad de observaciones por la variable PUNTOS
+
+```{r}
+vinos|>
+group_by(puntos)|>
+  summarise(n=n())
+
+```
+
+
+-Cantidad de observaciones por la variable PRECIO
+
+```{r}
+vinos|>
+group_by(precio)|>
+summarise(n=n())
+  
+```
+
+-Cantidad de observaciones por la variable PROVINCIA
+
+```{r}
+vinos|>
+group_by(provincia)|>
+summarise(n=n())
+  
+```
+
+-Cantidad de observaciones por la variable REGION_1
+
+```{r}
+vinos|>
+group_by(region_1)|>
+summarise(n=n())
+  
+```
+
+
+-Cantidad de observaciones por la variable REGION_2
+
+```{r}
+vinos|>
+group_by(region_2)|>
+summarise(n=n())
+  
+```
+
+
+-Cantidad de observaciones por la variable VARIEDAD
+
+```{r}
+vinos|>
+group_by(variedad)|>
+  summarise(n=n())
+  
+```
+
+-Cantidad de observaciones por la variable ViÑA
+```{r}
+vinos|>
+group_by(vina)|>
+  summarise(n=n())
+```
+
+
+-Cantidad de observaciones por la variable titulo_resena
+```{r}
+vinos|>
+group_by(titulo_resena)|>
+  summarise(n=n())
+```
+
 
 
 ## Hipótesis
