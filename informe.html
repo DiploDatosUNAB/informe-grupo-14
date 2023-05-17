@@ -379,12 +379,50 @@ WineEnthusiast y fueron tomados por Zack Thoutt</p></li>
 semana del 15 de junio de 2017</p></li>
 </ul>
 <p><a href="https://www.kaggle.com/datasets/zynicide/wine-reviews" class="uri">https://www.kaggle.com/datasets/zynicide/wine-reviews</a> <a href="https://www.winemag.com/?s=&amp;drink_type=wine" class="uri">https://www.winemag.com/?s=&amp;drink_type=wine</a> <a href="https://github.com/zackthoutt/wine-deep-learning/blob/master/README.md" class="uri">https://github.com/zackthoutt/wine-deep-learning/blob/master/README.md</a></p>
+<<<<<<< HEAD
 <p>Probando si funciona push</p>
 </div>
 <div id="exploración-de-los-datos" class="section level2">
 <h2>Exploración de los datos</h2>
 <pre class="r"><code># Cödigo de R acá 
 # Agregá más bloques según sea necesario</code></pre>
+=======
+</div>
+<div id="exploración-de-los-datos" class="section level2">
+<h2>Exploración de los datos</h2>
+<pre class="r"><code># Código para cargar o leer los datos
+
+vinos&lt;- read_csv(&quot;datos/vinos.csv&quot;)</code></pre>
+<pre><code>## Rows: 129971 Columns: 10
+## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: &quot;,&quot;
+## chr (8): pais, nombre, provincia, region_1, region_2, variedad, vina, titulo...
+## dbl (2): puntos, precio
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<p>Esta sección es una primera exploracion de los datos.</p>
+<p>¿Qué variables tiene?</p>
+<p>[1] “pais” “nombre” “puntos” “precio” “provincia”<br />
+[6] “region_1” “region_2” “variedad” “vina” “titulo_resena”</p>
+<p>Codigo</p>
+<pre class="r"><code>names(vinos) #La función names() por su parte, nos devuelve los nombres de las variables</code></pre>
+<pre><code>##  [1] &quot;pais&quot;          &quot;nombre&quot;        &quot;puntos&quot;        &quot;precio&quot;       
+##  [5] &quot;provincia&quot;     &quot;region_1&quot;      &quot;region_2&quot;      &quot;variedad&quot;     
+##  [9] &quot;vina&quot;          &quot;titulo_resena&quot;</code></pre>
+<p>¿Cuántas observaciones hay? Se pudieron encontrar en la tabla vinos
+129971 observaciones</p>
+<pre class="r"><code>count(vinos) #La funcion count cuenta el nro de filas</code></pre>
+<pre><code>## # A tibble: 1 × 1
+##        n
+##    &lt;int&gt;
+## 1 129971</code></pre>
+<p>¿Cuántas variables? Posee 10 Variables</p>
+<pre class="r"><code>length(vinos) # La funcion lengrh devuelve el tamaño de un elemento</code></pre>
+<pre><code>## [1] 10</code></pre>
+<pre class="r"><code>ncol(vinos) # también podríamos utilizar la función ncol, devuelve el número de columnas de una matriz.</code></pre>
+<pre><code>## [1] 10</code></pre>
+>>>>>>> 152b8b8bb88a414af548b4a926cced7dd1a2476b
 </div>
 <div id="hipótesis" class="section level2">
 <h2>Hipótesis</h2>
