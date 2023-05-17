@@ -53,7 +53,7 @@ Codigo
 ```{r}
 names(vinos) #La función names() por su parte, nos devuelve los nombres de las variables
 ```
---------------------------------------------------------------------
+
 
 ¿Cuántas observaciones hay?
 Se pudieron encontrar en la tabla vinos 129971 observaciones
@@ -64,12 +64,15 @@ count(vinos) #La funcion count cuenta el nro de filas
 
 
 
+¿Cuántas variables? Posee 10 Variables 
 
 ```{r}
-# Cödigo de R acá 
-# Agregá más bloques según sea necesario
+length(vinos) # La funcion lengrh devuelve el tamaño de un elemento
 ```
 
+```{r}
+ncol(vinos) # también podríamos utilizar la función ncol, devuelve el número de columnas de una matriz.
+```
 
 
 ## Hipótesis

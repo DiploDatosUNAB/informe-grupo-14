@@ -391,7 +391,6 @@ vinos&lt;- read_csv(&quot;datos/vinos.csv&quot;)</code></pre>
 <pre><code>##  [1] &quot;pais&quot;          &quot;nombre&quot;        &quot;puntos&quot;        &quot;precio&quot;       
 ##  [5] &quot;provincia&quot;     &quot;region_1&quot;      &quot;region_2&quot;      &quot;variedad&quot;     
 ##  [9] &quot;vina&quot;          &quot;titulo_resena&quot;</code></pre>
-<hr />
 <p>¿Cuántas observaciones hay? Se pudieron encontrar en la tabla vinos
 129971 observaciones</p>
 <pre class="r"><code>count(vinos) #La funcion count cuenta el nro de filas</code></pre>
@@ -399,8 +398,11 @@ vinos&lt;- read_csv(&quot;datos/vinos.csv&quot;)</code></pre>
 ##        n
 ##    &lt;int&gt;
 ## 1 129971</code></pre>
-<pre class="r"><code># Cödigo de R acá 
-# Agregá más bloques según sea necesario</code></pre>
+<p>¿Cuántas variables? Posee 10 Variables</p>
+<pre class="r"><code>length(vinos) # La funcion lengrh devuelve el tamaño de un elemento</code></pre>
+<pre><code>## [1] 10</code></pre>
+<pre class="r"><code>ncol(vinos) # también podríamos utilizar la función ncol, devuelve el número de columnas de una matriz.</code></pre>
+<pre><code>## [1] 10</code></pre>
 </div>
 <div id="hipótesis" class="section level2">
 <h2>Hipótesis</h2>
