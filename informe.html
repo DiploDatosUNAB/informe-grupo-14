@@ -695,6 +695,14 @@ apply</p>
 ##            63         37465             0          8996            63 
 ##      region_1      region_2      variedad          vina titulo_resena 
 ##         21247         79460             1             0             0</code></pre>
+<p>¿Hay diferencias? Si existen diferencias. Donde más datos faltantes
+hay es en la variable ‘nombre’ y ‘region_1’.</p>
+<p>Con la función sum(is.na()) puedo obtener la cantidad de datos
+faltantes por cada variable. Pruebo con las variables pais y nombre.</p>
+<pre class="r"><code>sum(is.na(vinos$pais))</code></pre>
+<pre><code>## [1] 63</code></pre>
+<pre class="r"><code>sum(is.na(vinos$nombre))</code></pre>
+<pre><code>## [1] 37465</code></pre>
 </div>
 <div id="hipótesis" class="section level2">
 <h2>Hipótesis</h2>
