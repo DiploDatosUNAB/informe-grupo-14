@@ -1,5 +1,5 @@
 ---
-title: "Trabajo Practivo N 1"
+title: "Trabajo Practivo N 1 - GRUPO 14"
 author: "Lopez Valeria - Alvarez Jorge"
 output: html_document
 ---
