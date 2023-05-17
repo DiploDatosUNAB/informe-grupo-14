@@ -14,20 +14,34 @@ library(naniar)
 library(visdat)
 ```
 
+```{r}
+# Código para cargar o leer los datos
+
+vinos<- read_csv("datos/vinos.csv")
+```
+
 
 ## Introducción
+Esta sección consiste en entre 2 y 3 párrafos describiendo los datos.
+Qué decir sobre los datos dependerá de los datos elegidos pero algunos detalles posibles son:
 
+-   ¿Qué datos son? 
+Los datos pertenecen a reseñas de vinos
+
+-   ¿De dónde provienen? ¿Quién los tomó?
+Los datos provienen de WineEnthusiast y fueron tomados por Zack Thoutt 
+-   ¿En qué período se tomaron?
+las datos fueron tomas durante la semana del 15 de junio de 2017
+
+https://www.kaggle.com/datasets/zynicide/wine-reviews
+https://www.winemag.com/?s=&drink_type=wine
+https://github.com/zackthoutt/wine-deep-learning/blob/master/README.md
 
 
 ## Exploración de los datos
 
 
-```{r}
-# Código para cargar o leer los datos
-library(readr)
-library(dplyr)
-vinos<- read_csv("datos/vinos.csv")
-```
+
 
 
 
