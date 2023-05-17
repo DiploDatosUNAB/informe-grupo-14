@@ -286,6 +286,18 @@ sum(is.na(vinos$nombre))
 
 ```
 
+-Cantidad de observaciones por la variable PUNTOS, ordenado de forma decreciente
+
+
+
+```{r}
+vinos|>
+group_by(puntos)|>
+  summarise(n=n()) |>
+ arrange(desc(puntos))
+
+```
+
 ## Hipótesis
 
 

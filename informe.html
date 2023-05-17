@@ -703,6 +703,26 @@ faltantes por cada variable. Pruebo con las variables pais y nombre.</p>
 <pre><code>## [1] 63</code></pre>
 <pre class="r"><code>sum(is.na(vinos$nombre))</code></pre>
 <pre><code>## [1] 37465</code></pre>
+<p>-Cantidad de observaciones por la variable PUNTOS, ordenado de forma
+decreciente</p>
+<pre class="r"><code>vinos|&gt;
+group_by(puntos)|&gt;
+  summarise(n=n()) |&gt;
+ arrange(desc(puntos))</code></pre>
+<pre><code>## # A tibble: 21 × 2
+##    puntos     n
+##     &lt;dbl&gt; &lt;int&gt;
+##  1    100    19
+##  2     99    33
+##  3     98    77
+##  4     97   229
+##  5     96   523
+##  6     95  1535
+##  7     94  3758
+##  8     93  6489
+##  9     92  9613
+## 10     91 11359
+## # ℹ 11 more rows</code></pre>
 </div>
 <div id="hipótesis" class="section level2">
 <h2>Hipótesis</h2>
