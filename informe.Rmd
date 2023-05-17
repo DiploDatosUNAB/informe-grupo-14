@@ -127,6 +127,41 @@ summarise(vinos, Valor_min = min(precio,na.rm = TRUE))
 ```
 
 
+Variable PUNTOS
+-   ¿Cuál es su valor medio y desvío estándard?
+
+Valor medio: 88.44714
+Desvio estandar: 3.03973
+```{r}
+summarise(vinos, valor_medio = mean(puntos,na.rm = TRUE))
+
+```
+
+
+```{r}
+summarise(vinos, desvio_std = sd(puntos,na.rm = TRUE))
+```
+
+
+-   ¿Cuál es su rango (valor máximo y valor mínimo)?
+
+Valor maximo: 100
+Valor minimo: 80
+
+```{r}
+summarise(vinos, Valor_max = max(puntos,na.rm = TRUE))
+```
+
+
+```{r}
+summarise(vinos, Valor_min = min(puntos,na.rm = TRUE))
+```
+
+
+NOTA IMPORTANTE: Solo se pudo tomar 2 variables debido a que son las unicas numericas!!!!
+
+
+
 ## Hipótesis
 
 
