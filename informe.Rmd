@@ -308,4 +308,19 @@ group_by(pais)|>
 
 ## Hipótesis
 
+Finalmente, esta sección contiene al menos 3 hipótesis o preguntas que puedan ser respondidas a partir de los datos. Éstas tienen que ser más o menos interesantes y no cosas que se hayan respondido con la exploración anterior.
+
+Traten de que sean hipótesis o preguntas que relacionen 2 o más variables. Por ejemplo, "¿Cuál es el mes con más turistas en una región?" no es una pregunta intersante, pero "Existe una relación entre la cantidad de visitas y la cantidad de hoteles en una región" es una hipótesis más jugosa que apunta a la relación entre varias variables y a un fenómeno subyacente que puede tener implicancia y aplicaciones.
+
+No tienen que responder estas preguntas en esta entrega.
+
+
+"Existe relación entre el precio del vino y la puntuación?"
+
+"Existe relación entre el país donde proviene el vino y el tipo de uva(variedad)?"
+
+"Existe relación entre el tipo de uva(variedad) y el precio?"
+
+" Indicar el nro de vinos que fueron fabricados a partir de la misma viña y que 
+presenten una puntuacion superior a 90?"
 
