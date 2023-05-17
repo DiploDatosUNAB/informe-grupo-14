@@ -355,17 +355,6 @@ display: none;
 </div>
 
 
-<pre class="r"><code># Código para cargar o leer los datos
-
-vinos&lt;- read_csv(&quot;datos/vinos.csv&quot;)</code></pre>
-<pre><code>## Rows: 129971 Columns: 10
-## ── Column specification ────────────────────────────────────────────────────────
-## Delimiter: &quot;,&quot;
-## chr (8): pais, nombre, provincia, region_1, region_2, variedad, vina, titulo...
-## dbl (2): puntos, precio
-## 
-## ℹ Use `spec()` to retrieve the full column specification for this data.
-## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 <div id="introducción" class="section level2">
 <h2>Introducción</h2>
 <p>Esta sección consiste en entre 2 y 3 párrafos describiendo los datos.
@@ -379,14 +368,6 @@ WineEnthusiast y fueron tomados por Zack Thoutt</p></li>
 semana del 15 de junio de 2017</p></li>
 </ul>
 <p><a href="https://www.kaggle.com/datasets/zynicide/wine-reviews" class="uri">https://www.kaggle.com/datasets/zynicide/wine-reviews</a> <a href="https://www.winemag.com/?s=&amp;drink_type=wine" class="uri">https://www.winemag.com/?s=&amp;drink_type=wine</a> <a href="https://github.com/zackthoutt/wine-deep-learning/blob/master/README.md" class="uri">https://github.com/zackthoutt/wine-deep-learning/blob/master/README.md</a></p>
-<<<<<<< HEAD
-<p>Probando si funciona push</p>
-</div>
-<div id="exploración-de-los-datos" class="section level2">
-<h2>Exploración de los datos</h2>
-<pre class="r"><code># Cödigo de R acá 
-# Agregá más bloques según sea necesario</code></pre>
-=======
 </div>
 <div id="exploración-de-los-datos" class="section level2">
 <h2>Exploración de los datos</h2>
@@ -422,10 +403,364 @@ vinos&lt;- read_csv(&quot;datos/vinos.csv&quot;)</code></pre>
 <pre><code>## [1] 10</code></pre>
 <pre class="r"><code>ncol(vinos) # también podríamos utilizar la función ncol, devuelve el número de columnas de una matriz.</code></pre>
 <pre><code>## [1] 10</code></pre>
->>>>>>> 152b8b8bb88a414af548b4a926cced7dd1a2476b
+<p>Seleccioná algunas variables resulten interesantes y mostrá sus
+propiedades. Algunas cosas para mostrar:</p>
+<ul>
+<li>¿Cuál es su valor medio y desvío estándard?</li>
+<li>¿Cuál es su rango (valor máximo y valor mínimo)?</li>
+<li>¿Hay alguna anomalía que sugiera que hay datos incorrectos? Valores
+imposibles (como valores negativos en una variable que sólo puede ser
+positiva) o poco creíbles.</li>
+<li>¿Cuántas observaciones hay por cada grupo? ¿Cuántos valores
+faltantes? ¿Hay diferencias?</li>
+</ul>
+<p>Esta sección sí tiene que tener código de R.</p>
+<p>Los resultados del código tienen que estar acompañados de un texto
+que los describa y que elabore sobre los mismos. Es decir, no sólo
+repetir lo que se ve, sino también comentar sobre su significado en el
+contexto de estos datos. No hace falta que sean párrafos largos; cada
+uno no debería tener más de 5-6 frases.</p>
+<p><strong>Todos</strong> los resultados presentados deben tener su
+código correspondiente. Cualquier respuesta/resultado presentado sin el
+correspondiente código R que generó el resultado no se considerará. Para
+ser claros: no reporten cosas en el documento que calcularon a mano o
+miraron por fuera de R (por ejemplo, si cuentan la cantidad de filas,
+tiene que estar elcódigo que cuenta la cantidad de filas).</p>
+<p>Es muy posible que tengan ganas de hacer algún cálculo y que no sepan
+cómo hacerlo en R. ¡En ese caso es mejor que consulten en el foro en vez
+de quedarse con las ganas!</p>
+<p>Variable PRECIO - ¿Cuál es su valor medio y desvío estándard?</p>
+<p>Valor medio: 35.36339 Desvio estandar: 41.02222</p>
+<pre class="r"><code>summarise(vinos, valor_medio = mean(precio,na.rm = TRUE))</code></pre>
+<pre><code>## # A tibble: 1 × 1
+##   valor_medio
+##         &lt;dbl&gt;
+## 1        35.4</code></pre>
+<pre class="r"><code>summarise(vinos, desvio_std = sd(precio,na.rm = TRUE))</code></pre>
+<pre><code>## # A tibble: 1 × 1
+##   desvio_std
+##        &lt;dbl&gt;
+## 1       41.0</code></pre>
+<ul>
+<li>¿Cuál es su rango (valor máximo y valor mínimo)?</li>
+</ul>
+<p>Valor maximo: 3300 Valor minimo: 4</p>
+<pre class="r"><code>summarise(vinos, Valor_max = max(precio,na.rm = TRUE))</code></pre>
+<pre><code>## # A tibble: 1 × 1
+##   Valor_max
+##       &lt;dbl&gt;
+## 1      3300</code></pre>
+<pre class="r"><code>summarise(vinos, Valor_min = min(precio,na.rm = TRUE))</code></pre>
+<pre><code>## # A tibble: 1 × 1
+##   Valor_min
+##       &lt;dbl&gt;
+## 1         4</code></pre>
+<p>Variable PUNTOS - ¿Cuál es su valor medio y desvío estándard?</p>
+<p>Valor medio: 88.44714 Desvio estandar: 3.03973</p>
+<pre class="r"><code>summarise(vinos, valor_medio = mean(puntos,na.rm = TRUE))</code></pre>
+<pre><code>## # A tibble: 1 × 1
+##   valor_medio
+##         &lt;dbl&gt;
+## 1        88.4</code></pre>
+<pre class="r"><code>summarise(vinos, desvio_std = sd(puntos,na.rm = TRUE))</code></pre>
+<pre><code>## # A tibble: 1 × 1
+##   desvio_std
+##        &lt;dbl&gt;
+## 1       3.04</code></pre>
+<ul>
+<li>¿Cuál es su rango (valor máximo y valor mínimo)?</li>
+</ul>
+<p>Valor maximo: 100 Valor minimo: 80</p>
+<pre class="r"><code>summarise(vinos, Valor_max = max(puntos,na.rm = TRUE))</code></pre>
+<pre><code>## # A tibble: 1 × 1
+##   Valor_max
+##       &lt;dbl&gt;
+## 1       100</code></pre>
+<pre class="r"><code>summarise(vinos, Valor_min = min(puntos,na.rm = TRUE))</code></pre>
+<pre><code>## # A tibble: 1 × 1
+##   Valor_min
+##       &lt;dbl&gt;
+## 1        80</code></pre>
+<p>NOTA IMPORTANTE: Solo se pudo tomar 2 variables debido a que son las
+unicas numericas!!!!</p>
+<ul>
+<li>¿Hay alguna anomalía que sugiera que hay datos incorrectos? Valores
+imposibles (como valores negativos en una variable que sólo puede ser
+positiva) o poco creíbles.</li>
+<li>¿Cuántas observaciones hay por cada grupo? ¿Cuántos valores
+faltantes? ¿Hay diferencias?</li>
+</ul>
+<p>-Cantidad de observaciones por la variable PAIS</p>
+<pre class="r"><code>vinos|&gt;
+group_by(pais)|&gt;
+  summarise(n=n())</code></pre>
+<pre><code>## # A tibble: 44 × 2
+##    pais                     n
+##    &lt;chr&gt;                &lt;int&gt;
+##  1 Alemania              2165
+##  2 Argentina             3800
+##  3 Armenia                  2
+##  4 Australia             2329
+##  5 Austria               3345
+##  6 Bosnia y Herzegovina     2
+##  7 Brazil                  52
+##  8 Bulgaria               141
+##  9 Canadá                 257
+## 10 Chile                 4472
+## # ℹ 34 more rows</code></pre>
+<ul>
+<li>Cantidad de observaciones por la variable NOMBRE</li>
+</ul>
+<pre class="r"><code>vinos|&gt;
+group_by(nombre)|&gt;
+  summarise(n=n())</code></pre>
+<pre><code>## # A tibble: 37,980 × 2
+##    nombre                                n
+##    &lt;chr&gt;                             &lt;int&gt;
+##  1 #19 Phantom Limb Belmont Vineyard     1
+##  2 #50 Mon Chou                          1
+##  3 #SocialSecret                         2
+##  4 %@#$!                                 1
+##  5 &amp;                                     2
+##  6 &#39;61 Rosé                              1
+##  7 &#39;A Rina                               1
+##  8 &#39;Blend 105&#39; Red Wine                  1
+##  9 &#39;Na Vota                              2
+## 10 &#39;P&#39;                                   1
+## # ℹ 37,970 more rows</code></pre>
+<p>-Cantidad de observaciones por la variable PUNTOS</p>
+<pre class="r"><code>vinos|&gt;
+group_by(puntos)|&gt;
+  summarise(n=n())</code></pre>
+<pre><code>## # A tibble: 21 × 2
+##    puntos     n
+##     &lt;dbl&gt; &lt;int&gt;
+##  1     80   397
+##  2     81   692
+##  3     82  1836
+##  4     83  3025
+##  5     84  6480
+##  6     85  9530
+##  7     86 12600
+##  8     87 16933
+##  9     88 17207
+## 10     89 12226
+## # ℹ 11 more rows</code></pre>
+<p>-Cantidad de observaciones por la variable PRECIO</p>
+<pre class="r"><code>vinos|&gt;
+group_by(precio)|&gt;
+summarise(n=n())</code></pre>
+<pre><code>## # A tibble: 391 × 2
+##    precio     n
+##     &lt;dbl&gt; &lt;int&gt;
+##  1      4    11
+##  2      5    46
+##  3      6   120
+##  4      7   433
+##  5      8   892
+##  6      9  1339
+##  7     10  3439
+##  8     11  2058
+##  9     12  3934
+## 10     13  3549
+## # ℹ 381 more rows</code></pre>
+<p>-Cantidad de observaciones por la variable PROVINCIA</p>
+<pre class="r"><code>vinos|&gt;
+group_by(provincia)|&gt;
+summarise(n=n())</code></pre>
+<pre><code>## # A tibble: 426 × 2
+##    provincia           n
+##    &lt;chr&gt;           &lt;int&gt;
+##  1 Achaia              5
+##  2 Aconcagua Costa    27
+##  3 Aegean             22
+##  4 Agioritikos         3
+##  5 Ahr                 9
+##  6 Alenquer            7
+##  7 Alentejano        937
+##  8 Alentejo          182
+##  9 Alenteo             1
+## 10 Algarve             9
+## # ℹ 416 more rows</code></pre>
+<p>-Cantidad de observaciones por la variable REGION_1</p>
+<pre class="r"><code>vinos|&gt;
+group_by(region_1)|&gt;
+summarise(n=n())</code></pre>
+<pre><code>## # A tibble: 1,230 × 2
+##    region_1                      n
+##    &lt;chr&gt;                     &lt;int&gt;
+##  1 Abruzzo                       6
+##  2 Adelaida District           110
+##  3 Adelaide                     16
+##  4 Adelaide Hills              107
+##  5 Adelaide Plains               4
+##  6 Aglianico d&#39;Irpinia           1
+##  7 Aglianico del Beneventano     2
+##  8 Aglianico del Taburno        13
+##  9 Aglianico del Vulture        90
+## 10 Agrelo                       50
+## # ℹ 1,220 more rows</code></pre>
+<p>-Cantidad de observaciones por la variable REGION_2</p>
+<pre class="r"><code>vinos|&gt;
+group_by(region_2)|&gt;
+summarise(n=n())</code></pre>
+<pre><code>## # A tibble: 18 × 2
+##    region_2              n
+##    &lt;chr&gt;             &lt;int&gt;
+##  1 California Other   2663
+##  2 Central Coast     11065
+##  3 Central Valley     1062
+##  4 Columbia Valley    8103
+##  5 Finger Lakes       1777
+##  6 Long Island         680
+##  7 Napa               6814
+##  8 Napa-Sonoma        1169
+##  9 New York Other      231
+## 10 North Coast         584
+## 11 Oregon Other        727
+## 12 Sierra Foothills   1462
+## 13 Sonoma             9028
+## 14 South Coast         272
+## 15 Southern Oregon     917
+## 16 Washington Other    534
+## 17 Willamette Valley  3423
+## 18 &lt;NA&gt;              79460</code></pre>
+<p>-Cantidad de observaciones por la variable VARIEDAD</p>
+<pre class="r"><code>vinos|&gt;
+group_by(variedad)|&gt;
+  summarise(n=n())</code></pre>
+<pre><code>## # A tibble: 708 × 2
+##    variedad        n
+##    &lt;chr&gt;       &lt;int&gt;
+##  1 Abouriou        3
+##  2 Agiorgitiko    63
+##  3 Aglianico     359
+##  4 Aidani          1
+##  5 Airen           3
+##  6 Albana         23
+##  7 Albanello       1
+##  8 Albariño      477
+##  9 Albarossa       2
+## 10 Aleatico        5
+## # ℹ 698 more rows</code></pre>
+<p>-Cantidad de observaciones por la variable ViÑA</p>
+<pre class="r"><code>vinos|&gt;
+group_by(vina)|&gt;
+  summarise(n=n())</code></pre>
+<pre><code>## # A tibble: 16,757 × 2
+##    vina                 n
+##    &lt;chr&gt;            &lt;int&gt;
+##  1 1+1=3                6
+##  2 10 Knots             4
+##  3 100 Percent Wine     3
+##  4 1000 Stories         2
+##  5 1070 Green           1
+##  6 10Span               4
+##  7 12 Linajes           8
+##  8 12C Wines            5
+##  9 13 Celsius           1
+## 10 14 Hands            67
+## # ℹ 16,747 more rows</code></pre>
+<p>-Cantidad de observaciones por la variable titulo_resena</p>
+<pre class="r"><code>vinos|&gt;
+group_by(titulo_resena)|&gt;
+  summarise(n=n())</code></pre>
+<pre><code>## # A tibble: 118,840 × 2
+##    titulo_resena                                                               n
+##    &lt;chr&gt;                                                                   &lt;int&gt;
+##  1 1+1=3 2008 Rosé Cabernet Sauvignon (Penedès)                                1
+##  2 1+1=3 NV Brut Sparkling (Cava)                                              2
+##  3 1+1=3 NV Cygnus Brut Nature Reserva Made With Organic Grapes Sparkling…     2
+##  4 1+1=3 NV Rosé Sparkling (Cava)                                              1
+##  5 10 Knots 2006 Beachcomber White (Paso Robles)                               1
+##  6 10 Knots 2006 Chardonnay (Santa Barbara County)                             1
+##  7 10 Knots 2009 Moonraker Grenache (Paso Robles)                              1
+##  8 10 Knots 2010 Viognier (Paso Robles)                                        1
+##  9 100 Percent Wine 2012 All Profits to Charity Red (California)               1
+## 10 100 Percent Wine 2014 All Profits to Charity Sauvignon Blanc (Californ…     1
+## # ℹ 118,830 more rows</code></pre>
+<p>Definición valores faltantes en R,se entiende valores que debieron
+haberse registrado, pero no lo fueron. R almacena los valores faltantes
+como NA, lo que significa Not Available</p>
+<p>Primero preguntamos ¿Hay valores faltantes?</p>
+<pre class="r"><code>any_na(vinos) #La función any_na() por su parte, nos devuelve TRUE si hay valores faltantes</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<p>Obtengo los valores faltantes de toda la tabla vinos</p>
+<pre class="r"><code>sum(is.na(vinos))</code></pre>
+<pre><code>## [1] 147295</code></pre>
+<p>Obtengo los valores faltantes para cada variable con la función
+apply</p>
+<pre class="r"><code>apply(X = is.na(vinos), MARGIN = 2, FUN = sum)</code></pre>
+<pre><code>##          pais        nombre        puntos        precio     provincia 
+##            63         37465             0          8996            63 
+##      region_1      region_2      variedad          vina titulo_resena 
+##         21247         79460             1             0             0</code></pre>
+<p>¿Hay diferencias? Si existen diferencias. Donde más datos faltantes
+hay es en la variable ‘nombre’ y ‘region_1’.</p>
+<p>Con la función sum(is.na()) puedo obtener la cantidad de datos
+faltantes por cada variable. Pruebo con las variables pais y nombre.</p>
+<pre class="r"><code>sum(is.na(vinos$pais))</code></pre>
+<pre><code>## [1] 63</code></pre>
+<pre class="r"><code>sum(is.na(vinos$nombre))</code></pre>
+<pre><code>## [1] 37465</code></pre>
+<p>-Cantidad de observaciones por la variable PUNTOS, ordenado de forma
+decreciente</p>
+<pre class="r"><code>vinos|&gt;
+group_by(puntos)|&gt;
+  summarise(n=n()) |&gt;
+ arrange(desc(puntos))</code></pre>
+<pre><code>## # A tibble: 21 × 2
+##    puntos     n
+##     &lt;dbl&gt; &lt;int&gt;
+##  1    100    19
+##  2     99    33
+##  3     98    77
+##  4     97   229
+##  5     96   523
+##  6     95  1535
+##  7     94  3758
+##  8     93  6489
+##  9     92  9613
+## 10     91 11359
+## # ℹ 11 more rows</code></pre>
+<ul>
+<li>Cantidad de observaciones por PAIS, ordenado en forma decreciente
+para saber que país tiene más observaciones.</li>
+</ul>
+<pre class="r"><code>vinos|&gt;
+group_by(pais)|&gt;
+  summarise(n=n())|&gt;
+  arrange(desc(n))</code></pre>
+<pre><code>## # A tibble: 44 × 2
+##    pais               n
+##    &lt;chr&gt;          &lt;int&gt;
+##  1 Estados Unidos 54504
+##  2 Francia        22093
+##  3 Italia         19540
+##  4 España          6645
+##  5 Portugal        5691
+##  6 Chile           4472
+##  7 Argentina       3800
+##  8 Austria         3345
+##  9 Australia       2329
+## 10 Alemania        2165
+## # ℹ 34 more rows</code></pre>
 </div>
 <div id="hipótesis" class="section level2">
 <h2>Hipótesis</h2>
+<p>Traten de que sean hipótesis o preguntas que relacionen 2 o más
+variables. Por ejemplo, “¿Cuál es el mes con más turistas en una
+región?” no es una pregunta intersante, pero “Existe una relación entre
+la cantidad de visitas y la cantidad de hoteles en una región” es una
+hipótesis más jugosa que apunta a la relación entre varias variables y a
+un fenómeno subyacente que puede tener implicancia y aplicaciones.</p>
+<p>No tienen que responder estas preguntas en esta entrega.</p>
+<p>“Existe relación entre el precio del vino y la puntuación?”</p>
+<p>“Existe relación entre el país donde proviene el vino y el tipo de
+uva(variedad)?”</p>
+<p>“Existe relación entre el tipo de uva(variedad) y el precio?”</p>
+<p>” Indicar el nro de vinos que fueron fabricados a partir de la misma
+viña y que presenten una puntuacion superior a 90?”</p>
 </div>
 
 
