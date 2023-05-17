@@ -39,6 +39,7 @@ https://www.kaggle.com/datasets/zynicide/wine-reviews
 https://www.winemag.com/?s=&drink_type=wine
 https://github.com/zackthoutt/wine-deep-learning/blob/master/README.md
 
+Probando si funciona push
 
 ## Exploración de los datos
 
