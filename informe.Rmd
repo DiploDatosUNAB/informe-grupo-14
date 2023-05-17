@@ -22,6 +22,8 @@ vinos<- read_csv("datos/vinos.csv")
 
 
 ## Introducción
+
+
 Esta sección consiste en entre 2 y 3 párrafos describiendo los datos.
 Qué decir sobre los datos dependerá de los datos elegidos pero algunos detalles posibles son:
 
