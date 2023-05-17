@@ -53,8 +53,14 @@ Codigo
 ```{r}
 names(vinos) #La función names() por su parte, nos devuelve los nombres de las variables
 ```
+--------------------------------------------------------------------
 
+¿Cuántas observaciones hay?
+Se pudieron encontrar en la tabla vinos 129971 observaciones
 
+```{r}
+count(vinos) #La funcion count cuenta el nro de filas
+```
 
 
 
