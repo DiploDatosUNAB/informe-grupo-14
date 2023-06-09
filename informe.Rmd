@@ -242,20 +242,9 @@ apply(X = is.na(vinos), MARGIN = 2, FUN = sum)
 
 
 ¿Hay diferencias? Si existen diferencias. Donde más datos faltantes hay es en la variable 'nombre' y 'region_2'.
-
-
-Con la función sum(is.na()) puedo obtener la cantidad de datos faltantes por cada variable. Pruebo con las variables pais y nombre.
-
-```{r}
-sum(is.na(vinos$pais))
-```
-```{r}
-sum(is.na(vinos$nombre))
-
-```
+Los datos faltantes son datos que deberían estar pero no fueron registrados.
 
 -Cantidad de observaciones por la variable PUNTOS, ordenado de forma decreciente
-
 
 ```{r}
 vinos|>
