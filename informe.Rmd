@@ -269,14 +269,31 @@ group_by(pais)|>
 
 ## Hipótesis
 
-Finalmente, esta sección contiene al menos 3 hipótesis o preguntas que puedan ser respondidas a partir de los datos. Éstas tienen que ser más o menos interesantes y no cosas que se hayan respondido con la exploración anterior.
-
-Traten de que sean hipótesis o preguntas que relacionen 2 o más variables. Por ejemplo, "¿Cuál es el mes con más turistas en una región?" no es una pregunta intersante, pero "Existe una relación entre la cantidad de visitas y la cantidad de hoteles en una región" es una hipótesis más jugosa que apunta a la relación entre varias variables y a un fenómeno subyacente que puede tener implicancia y aplicaciones.
-
-No tienen que responder estas preguntas en esta entrega.
 
 
 "Existe relación entre el precio del vino y la puntuación?"
+
+Si bien no es particularmente esclarecedor, muestra que hay cierta concentración de vinos de menor precio en el rango de 85 a 92,5 puntos.
+
+Podemos deducir mediante el grafico que se produce una concentracion de vinos de menor precio en el rango comprendido entre los 85 y 90 puntos aproximadamente, se limito la muestra para vinos por debajo de los $200.
+
+```{r}
+# Limitamos el precio a $200
+vinos2 <- vinos |>
+  filter(precio < 200 & !is.na(precio))
+
+# Datos
+vinos2 |>
+  ggplot(aes(precio, puntos)) +
+  geom_point(position="jitter") +
+  geom_hex(bins = 50) +
+  labs(title="Puntuacion del Vino vs. Precio",
+       subtitle="(Precio inferior a $200)",
+       x="Precio ($)", y="Puntos (0-100)")
+```
+
+
+
 
 "Existe relación entre el país donde proviene el vino y el tipo de uva(variedad)?"
 
