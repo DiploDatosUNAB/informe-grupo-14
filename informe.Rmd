@@ -10,8 +10,6 @@ knitr::opts_chunk$set(echo = TRUE)
 # Cargar los paquetes necesarios acá
 library(readr)
 library(dplyr)
-library(naniar)
-library(visdat)
 ```
 
 
@@ -46,10 +44,6 @@ Esta sección es una primera exploracion de los datos.
 
 ¿Qué variables tiene?
 
- [1] "pais"          "nombre"        "puntos"        "precio"        "provincia"    
- [6] "region_1"      "region_2"      "variedad"      "vina"          "titulo_resena"
-
-Codigo 
 ```{r}
 names(vinos) #La función names() por su parte, nos devuelve los nombres de las variables
 ```
@@ -70,9 +64,7 @@ count(vinos) #La funcion count cuenta el nro de filas
 length(vinos) # La funcion lengrh devuelve el tamaño de un elemento
 ```
 
-```{r}
-ncol(vinos) # también podríamos utilizar la función ncol, devuelve el número de columnas de una matriz.
-```
+
 
 
 Seleccioná algunas variables resulten interesantes y mostrá sus propiedades.
