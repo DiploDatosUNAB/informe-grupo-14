@@ -10,6 +10,7 @@ knitr::opts_chunk$set(echo = TRUE)
 # Cargar los paquetes necesarios acá
 library(readr)
 library(dplyr)
+library(ggplot2)
 ```
 
 
@@ -117,20 +118,13 @@ summarise(vinos, desvio_std = sd(puntos,na.rm = TRUE))
 
 
 ```{r}
-summarise(vinos, Valor_max = max(puntos,na.rm = TRUE))
+summarise(vinos, 
+          Valor_max = max(puntos,na.rm = TRUE),
+          Valor_min = min(puntos,na.rm = TRUE))
 ```
-
-
-```{r}
-summarise(vinos, Valor_min = min(puntos,na.rm = TRUE))
-```
-
-
-
 
 -   ¿Hay alguna anomalía que sugiera que hay datos incorrectos? Valores imposibles (como valores negativos en una variable que sólo puede ser positiva) o poco creíbles.
 -   ¿Cuántas observaciones hay por cada grupo? ¿Cuántos valores faltantes? ¿Hay diferencias?
-
 
 -Cantidad de observaciones por la variable PAIS
 
@@ -140,14 +134,12 @@ group_by(pais)|>
   summarise(n=n())
 ```
 
-
 - Cantidad de observaciones por la variable NOMBRE
 ```{r}
 vinos|>
 group_by(nombre)|>
   summarise(n=n())
 ```
-
 
 -Cantidad de observaciones por la variable PUNTOS
 
@@ -157,7 +149,6 @@ group_by(puntos)|>
   summarise(n=n())
 
 ```
-
 
 -Cantidad de observaciones por la variable PRECIO
 
@@ -196,7 +187,6 @@ summarise(n=n())
   
 ```
 
-
 -Cantidad de observaciones por la variable VARIEDAD
 
 ```{r}
@@ -220,6 +210,7 @@ vinos|>
 group_by(titulo_resena)|>
   summarise(n=n())
 ```
+
 Definición valores faltantes en R,se entiende valores que debieron haberse registrado, pero no lo fueron. R almacena los valores faltantes como NA, lo que significa Not Available
 
 Primero preguntamos ¿Hay valores faltantes?
@@ -241,7 +232,7 @@ apply(X = is.na(vinos), MARGIN = 2, FUN = sum)
 ```
 
 
-¿Hay diferencias? Si existen diferencias. Donde más datos faltantes hay es en la variable 'nombre' y 'region_1'.
+¿Hay diferencias? Si existen diferencias. Donde más datos faltantes hay es en la variable 'nombre' y 'region_2'.
 
 
 Con la función sum(is.na()) puedo obtener la cantidad de datos faltantes por cada variable. Pruebo con las variables pais y nombre.
@@ -257,12 +248,14 @@ sum(is.na(vinos$nombre))
 -Cantidad de observaciones por la variable PUNTOS, ordenado de forma decreciente
 
 
-
 ```{r}
 vinos|>
 group_by(puntos)|>
   summarise(n=n()) |>
- arrange(desc(puntos))
+ arrange(desc(puntos))|>
+  ggplot(aes(n))+
+  geom_histogram(bins = 30)
+
 
 ```
 - Cantidad de observaciones por PAIS, ordenado en forma decreciente para saber que país tiene más observaciones.
