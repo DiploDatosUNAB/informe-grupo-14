@@ -10,6 +10,7 @@ knitr::opts_chunk$set(echo = TRUE)
 # Cargar los paquetes necesarios acá
 library(readr)
 library(dplyr)
+library(naniar)
 library(ggplot2)
 library(hexbin)
 ```
@@ -293,13 +294,53 @@ vinos2 |>
        x="Precio ($)", y="Puntos (0-100)")
 ```
 
+Se desea saber cómo se comparan los países en términos de puntos para cada vino. ¿Hay alguna diferencia en la calidad del vino entre cada país? En particular, se va comparar los vinos de EEUU con los vinos italianos y franceses. Se usara un diagrama de caja que también incluye la media.
+
+¿Existe relación entre el país de donde proviene el vino y la puntuación?. 
+
+Como ya sabemos los mayores productores de vino son Francia, Italia y Estados Unidos. A continuación se organizará los datos por país y se generará un gráfico de barras que muestra la cantidad de vinos elaborado en cada país, se limitará la muestra a los 20 países que mayor producción tienen.
+
+```{r}
+
+ vinos_pais <- group_by(vinos,pais) |>
+summarise(n= n()) |>
+filter(n>30)|>
+arrange(desc(n))
+head(vinos_pais,20)
+```
+
+```{r}
+
+ggplot(vinos_pais,aes(reorder(pais, n), n, fill= pais)) +
+  geom_bar(stat="identity") +
+  geom_text(aes(label=n), hjust=-.1, vjust=.25) +
+  xlab("PAIS") +
+  ylab("vinos Elaborados") +
+  ylim(0, 60000) +
+  guides(fill=FALSE)+
+  coord_flip()
+  
+ 
+```
+
+Tomamos estos tres paises para comparar en términos de puntos.
+```{r}
+EEUU_Francia_Italia <- filter(vinos, pais  %in%  c("Estados Unidos","Francia","Italia"))
+```
+Se usará un diagrama de caja que también incluye la media.
+
+```{r}
+
+ggplot(EEUU_Francia_Italia, mapping= aes(pais,puntos, fill=pais))+
+  geom_boxplot()+
+  stat_summary(fun.y="mean", geom="point", shape=21, fill= "red") +
+  scale_x_discrete(labels=c("Estados Unidos","Francia", "Italia")) +
+  guides(fill=FALSE) +
+  theme(axis.title.x=element_blank())
+```
+Es interesante notar que tanto Italia como EEUU tienen medias más altas que las medianas, lo que significa que tienen unos pocos vinos selectos excepcionales, mientras que Francia tiene casi exactamente la misma mediana y media, las cuales son más altas que Italia y EEUU, lo que significa que Francia posee vinos de mejor calidad (puntuación).
 
 
 
-"Existe relación entre el país donde proviene el vino y el tipo de uva(variedad)?"
 
-"Existe relación entre el tipo de uva(variedad) y el precio?"
-
-" Indicar el nro de vinos que fueron fabricados a partir de la misma viña y que 
-presenten una puntuacion superior a 90?"
 
