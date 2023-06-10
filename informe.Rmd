@@ -1,6 +1,6 @@
 ---
-title: "titulo"
-author: "nombres"
+title: "Trabajo Practivo N 1 - GRUPO 14"
+author: "Lopez Valeria - Alvarez Jorge"
 output: html_document
 ---
 
@@ -8,29 +8,339 @@ output: html_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 # Cargar los paquetes necesarios acá
+library(readr)
+library(dplyr)
+library(naniar)
+library(ggplot2)
+library(hexbin)
 ```
 
 
 ## Introducción
 
 
+Esta sección consiste en entre 2 y 3 párrafos describiendo los datos.
+Qué decir sobre los datos dependerá de los datos elegidos pero algunos detalles posibles son:
+
+-   ¿Qué datos son? 
+Los datos pertenecen a reseñas de vinos
+
+-   ¿De dónde provienen? ¿Quién los tomó?
+Los datos provienen de WineEnthusiast y fueron tomados por Zack Thoutt 
+-   ¿En qué período se tomaron?
+las datos fueron tomas durante la semana del 15 de junio de 2017
+
+https://www.kaggle.com/datasets/zynicide/wine-reviews
+https://www.winemag.com/?s=&drink_type=wine
+https://github.com/zackthoutt/wine-deep-learning/blob/master/README.md
+
+
 
 ## Exploración de los datos
-
-
 ```{r}
 # Código para cargar o leer los datos
+
+vinos<- read_csv("datos/vinos.csv")
 ```
 
+Esta sección es una primera exploracion de los datos.
+
+¿Qué variables tiene?
+
+```{r}
+names(vinos) #La función names() por su parte, nos devuelve los nombres de las variables
+```
+
+
+¿Cuántas observaciones hay?
+Se pudieron encontrar en la tabla vinos 129971 observaciones
+
+```{r}
+count(vinos) #La funcion count cuenta el nro de filas
+```
+
+
+
+¿Cuántas variables? Posee 10 Variables 
+
+```{r}
+length(vinos) # La funcion lengrh devuelve el tamaño de un elemento
+```
+
+
+
+
+Seleccioná algunas variables resulten interesantes y mostrá sus propiedades.
+Algunas cosas para mostrar:
+
+
+Variable PRECIO
+-   ¿Cuál es su valor medio y desvío estándard?
 
 
 ```{r}
-# Cödigo de R acá 
-# Agregá más bloques según sea necesario
+summarise(vinos, valor_medio = mean(precio,na.rm = TRUE))
+
+```
+
+```{r}
+summarise(vinos, desvio_std = sd(precio,na.rm = TRUE))
 ```
 
 
+-   ¿Cuál es su rango (valor máximo y valor mínimo)?
+
+
+```{r}
+summarise(vinos, Valor_max = max(precio,na.rm = TRUE))
+```
+
+
+```{r}
+summarise(vinos, Valor_min = min(precio,na.rm = TRUE))
+```
+
+
+Variable PUNTOS
+-   ¿Cuál es su valor medio y desvío estándard?
+
+
+```{r}
+summarise(vinos, valor_medio = mean(puntos,na.rm = TRUE))
+
+```
+
+
+```{r}
+summarise(vinos, desvio_std = sd(puntos,na.rm = TRUE))
+```
+
+
+-   ¿Cuál es su rango (valor máximo y valor mínimo)?
+
+
+```{r}
+summarise(vinos, 
+          Valor_max = max(puntos,na.rm = TRUE),
+          Valor_min = min(puntos,na.rm = TRUE))
+```
+
+-   ¿Hay alguna anomalía que sugiera que hay datos incorrectos? Valores imposibles (como valores negativos en una variable que sólo puede ser positiva) o poco creíbles.
+-   ¿Cuántas observaciones hay por cada grupo? ¿Cuántos valores faltantes? ¿Hay diferencias?
+
+-Cantidad de observaciones por la variable PAIS
+
+```{r}
+vinos|>
+group_by(pais)|>
+  summarise(n=n())
+```
+
+- Cantidad de observaciones por la variable NOMBRE
+```{r}
+vinos|>
+group_by(nombre)|>
+  summarise(n=n())
+```
+
+-Cantidad de observaciones por la variable PUNTOS
+
+```{r}
+vinos|>
+group_by(puntos)|>
+  summarise(n=n())
+
+```
+
+-Cantidad de observaciones por la variable PRECIO
+
+```{r}
+vinos|>
+group_by(precio)|>
+summarise(n=n())
+  
+```
+
+-Cantidad de observaciones por la variable PROVINCIA
+ Se puede concluir que la provincia con mayor produccion de vinos es California
+ 
+```{r}
+vinos|>
+group_by(provincia)|>
+summarise(n=n()) |>
+arrange(desc(n))
+  
+```
+
+-Cantidad de observaciones por la variable REGION_1
+
+No se puede llegar a una conclusion ya que se presentan mucho datos NA
+```{r}
+vinos|>
+group_by(region_1)|>
+summarise(n=n()) |>
+arrange(desc(n))
+  
+```
+
+
+-Cantidad de observaciones por la variable REGION_2
+No se puede llegar a una conclusion ya que se presentan mucho datos NA
+
+```{r}
+vinos|>
+group_by(region_2)|>
+summarise(n=n()) |>
+arrange(desc(n))
+  
+```
+
+-Cantidad de observaciones por la variable VARIEDAD
+
+La variedad de uvas mas usada para la fabricacion de vinos es la Pinot Noir
+
+```{r}
+vinos|>
+group_by(variedad)|>
+  summarise(n=n()) |>
+  arrange(desc(n))
+  
+```
+
+-Cantidad de observaciones por la variable ViÑA
+```{r}
+vinos|>
+group_by(vina)|>
+  summarise(n=n())
+```
+
+
+-Cantidad de observaciones por la variable titulo_resena
+```{r}
+vinos|>
+group_by(titulo_resena)|>
+  summarise(n=n())
+```
+
+Definición valores faltantes en R,se entiende valores que debieron haberse registrado, pero no lo fueron. R almacena los valores faltantes como NA, lo que significa Not Available
+
+Primero preguntamos ¿Hay valores faltantes?
+
+```{r}
+any_na(vinos) #La función any_na() por su parte, nos devuelve TRUE si hay valores faltantes
+```
+Obtengo los valores faltantes de toda la tabla vinos
+
+```{r}
+sum(is.na(vinos))
+
+```
+
+Obtengo los valores faltantes para cada variable con la función apply
+
+```{r}
+apply(X = is.na(vinos), MARGIN = 2, FUN = sum)
+```
+
+
+¿Hay diferencias? Si existen diferencias. Donde más datos faltantes hay es en la variable 'nombre' y 'region_2'.
+Los datos faltantes son datos que deberían estar pero no fueron registrados.
+
+-Cantidad de observaciones por la variable PUNTOS, ordenado de forma decreciente
+
+```{r}
+vinos|>
+group_by(puntos)|>
+  summarise(n=n()) |>
+ arrange(desc(puntos))|>
+  ggplot(aes(n))+
+  geom_histogram(bins = 30)
+
+
+```
+- Cantidad de observaciones por PAIS, ordenado en forma decreciente para saber que país tiene más observaciones.
+
+Aqui ya podemos ver que unos de los mayores productores de vino es EEUU.
+
+```{r}
+vinos|>
+group_by(pais)|>
+  summarise(n=n())|>
+  arrange(desc(n))
+```
 
 ## Hipótesis
+
+
+
+"Existe relación entre el precio del vino y la puntuación?"
+
+Si bien no es particularmente esclarecedor, muestra que hay cierta concentración de vinos de menor precio en el rango de 85 a 92,5 puntos.
+
+Podemos deducir mediante el grafico que se produce una concentracion de vinos de menor precio en el rango comprendido entre los 85 y 90 puntos aproximadamente, se limito la muestra para vinos por debajo de los $200.
+
+```{r}
+# Limitamos el precio a $200
+vinos2 <- vinos |>
+  filter(precio < 200 & !is.na(precio))
+
+# Datos
+vinos2 |>
+  ggplot(aes(precio, puntos)) +
+  geom_point(position="jitter") +
+  geom_hex(bins = 50) +
+  labs(title="Puntuacion del Vino vs. Precio",
+       subtitle="(Precio inferior a $200)",
+       x="Precio ($)", y="Puntos (0-100)")
+```
+
+Se desea saber cómo se comparan los países en términos de puntos para cada vino. ¿Hay alguna diferencia en la calidad del vino entre cada país? En particular, se va comparar los vinos de EEUU con los vinos italianos y franceses. Se usara un diagrama de caja que también incluye la media.
+
+¿Existe relación entre el país de donde proviene el vino y la puntuación?. 
+
+Como ya sabemos los mayores productores de vino son Francia, Italia y Estados Unidos. A continuación se organizará los datos por país y se generará un gráfico de barras que muestra la cantidad de vinos elaborado en cada país, se limitará la muestra a los 20 países que mayor producción tienen.
+
+```{r}
+
+ vinos_pais <- group_by(vinos,pais) |>
+summarise(n= n()) |>
+filter(n>30)|>
+arrange(desc(n))
+head(vinos_pais,20)
+```
+
+```{r}
+
+ggplot(vinos_pais,aes(reorder(pais, n), n, fill= pais)) +
+  geom_bar(stat="identity") +
+  geom_text(aes(label=n), hjust=-.1, vjust=.25) +
+  xlab("PAIS") +
+  ylab("vinos Elaborados") +
+  ylim(0, 60000) +
+  guides(fill=FALSE)+
+  coord_flip()
+  
+ 
+```
+
+Tomamos estos tres paises para comparar en términos de puntos.
+```{r}
+EEUU_Francia_Italia <- filter(vinos, pais  %in%  c("Estados Unidos","Francia","Italia"))
+```
+Se usará un diagrama de caja que también incluye la media.
+
+```{r}
+
+ggplot(EEUU_Francia_Italia, mapping= aes(pais,puntos, fill=pais))+
+  geom_boxplot()+
+  stat_summary(fun.y="mean", geom="point", shape=21, fill= "red") +
+  scale_x_discrete(labels=c("Estados Unidos","Francia", "Italia")) +
+  guides(fill=FALSE) +
+  theme(axis.title.x=element_blank())
+```
+Es interesante notar que tanto Italia como EEUU tienen medias más altas que las medianas, lo que significa que tienen unos pocos vinos selectos excepcionales, mientras que Francia tiene casi exactamente la misma mediana y media, las cuales son más altas que Italia y EEUU, lo que significa que Francia posee vinos de mejor calidad (puntuación).
+
+
+
 
 
