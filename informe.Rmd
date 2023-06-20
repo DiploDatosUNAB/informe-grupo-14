@@ -316,7 +316,7 @@ ggplot(vinos_pais,aes(reorder(pais, n), n, fill= pais)) +
   xlab("PAIS") +
   ylab("vinos Elaborados") +
   ylim(0, 60000) +
-  guides(fill=FALSE)+
+  guides(fill="none")+
   coord_flip()
   
  
