@@ -249,13 +249,12 @@ Los datos faltantes son datos que deberían estar pero no fueron registrados.
 -Cantidad de observaciones por la variable PUNTOS, ordenado de forma decreciente
 
 ```{r}
-vinos|>
-group_by(puntos)|>
+ vinos|>
+  group_by(puntos)|>
   summarise(n=n()) |>
- arrange(desc(puntos))|>
-  ggplot(aes(n))+
-  geom_histogram(bins = 30)
-
+  arrange(desc(puntos)) |>
+ ggplot(mapping = aes(x= puntos, y = n))+
+   geom_col()
 
 ```
 - Cantidad de observaciones por PAIS, ordenado en forma decreciente para saber que país tiene más observaciones.
