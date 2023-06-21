@@ -220,9 +220,9 @@ group_by(titulo_resena)|>
   
 ```
 
-**_Definición valores faltantes en R,se entiende valores que debieron
+<span style="color:blue"> **_Definición valores faltantes en R,se entiende valores que debieron
 haberse registrado, pero no lo fueron. R almacena los valores faltantes
-como NA, lo que significa Not Available_**
+como NA, lo que significa Not Available_** </span>
 
 Primero preguntamos ¿Hay valores faltantes?
 
