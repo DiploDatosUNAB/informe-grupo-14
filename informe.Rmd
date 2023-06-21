@@ -24,9 +24,7 @@ library(hexbin)
 
 ## Introducción
 
-Los datos pertenecen a reseñas de vinos. Los datos provienen de
-WineEnthusiast y fueron tomados por Zack Thoutt. Se tomaron durante la
-semana del 15 de junio de 2017
+Los datos pertenecen a reseñas de vinos. Los datos provienen de WineEnthusiast y fueron tomados por Zack Thoutt. Se tomaron durante la semana del 15 de junio de 2017.
 
 <https://www.kaggle.com/datasets/zynicide/wine-reviews>
 <https://www.winemag.com/?s=&drink_type=wine>
@@ -40,40 +38,39 @@ semana del 15 de junio de 2017
 vinos<- read_csv("datos/vinos.csv")
 ```
 
-Esta sección es una primera exploracion de los datos.
-
-¿Qué variables tiene?
+Tiene las siguientes variables: 
 
 ```{r}
 names(vinos) #La función names() por su parte, nos devuelve los nombres de las variables
 ```
 
-¿Cuántas observaciones hay? Se pudieron encontrar en la tabla vinos
-129971 observaciones
-
 ```{r}
-count(vinos) #La funcion count cuenta el nro de filas
+cantidad_obs_vinos <-count(vinos) #La funcion count cuenta el nro de filas
 ```
 
-¿Cuántas variables? Posee 10 Variables
+Se pudieron encontrar en la tabla vinos `r cantidad_obs_vinos ` observaciones
+
 
 ```{r}
-length(vinos) # La funcion lengrh devuelve el tamaño de un elemento
+cantidad_variables_vinos <-length(vinos) # La funcion lengrh devuelve el tamaño de un elemento
 ```
 
-Seleccioná algunas variables resulten interesantes y mostrá sus
-propiedades. Algunas cosas para mostrar:
+Posee `r cantidad_variables_vinos` Variables
 
-Variable PRECIO - ¿Cuál es su valor medio y desvío estándard?
+## Algunas cosas para mostrar:
 
 ```{r}
-summarise(vinos, valor_medio = mean(precio,na.rm = TRUE))
+valor_medio_precio <- summarise(vinos, valor_medio = mean(precio,na.rm = TRUE))
 
 ```
+El valor medio de la variable precio es `r valor_medio_precio`
 
 ```{r}
-summarise(vinos, desvio_std = sd(precio,na.rm = TRUE))
+desvio_std_precio <- summarise(vinos, desvio_std = sd(precio,na.rm = TRUE))
 ```
+
+ El desvío estándar de la variable precio es `r desvio_std_precio`
+
 
 -   ¿Cuál es su rango (valor máximo y valor mínimo)?
 
