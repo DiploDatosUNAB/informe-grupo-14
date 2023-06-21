@@ -243,9 +243,8 @@ Los valores faltantes para cada variable es la siguiente
 apply(X = is.na(vinos), MARGIN = 2, FUN = sum)
 ```
 
-¿Hay diferencias? Si existen diferencias. Donde más datos faltantes hay
-es en la variable 'nombre' y 'region_2'. Los datos faltantes son datos
-que deberían estar pero no fueron registrados.
+Podemos observar que en las variables 'nombre' y 'region_2' es donde más datos faltantes hay.
+Los datos faltantes son datos que deberían estar pero no fueron registrados.
 
 #### Cantidad de observaciones por la variable PUNTOS, ordenado de forma decreciente
 
