@@ -20,6 +20,7 @@ library(dplyr)
 library(naniar)
 library(ggplot2)
 library(hexbin)
+library(DT)
 ```
 
 ## Introducción
@@ -30,7 +31,7 @@ Los datos pertenecen a reseñas de vinos. Los datos provienen de WineEnthusiast 
 <https://www.winemag.com/?s=&drink_type=wine>
 <https://github.com/zackthoutt/wine-deep-learning/blob/master/README.md>
 
-## Exploración de los datos
+### Exploración de los datos
 
 ```{r}
 # Código para cargar o leer los datos
@@ -48,176 +49,180 @@ names(vinos) #La función names() por su parte, nos devuelve los nombres de las 
 cantidad_obs_vinos <-count(vinos) #La funcion count cuenta el nro de filas
 ```
 
-Se pudieron encontrar en la tabla vinos `r cantidad_obs_vinos ` observaciones
+Se pudieron encontrar en la tabla vinos __`r cantidad_obs_vinos `__ observaciones
 
 
 ```{r}
 cantidad_variables_vinos <-length(vinos) # La funcion lengrh devuelve el tamaño de un elemento
 ```
 
-Posee `r cantidad_variables_vinos` Variables
+Posee __`r cantidad_variables_vinos`__ Variables
 
-## Algunas cosas para mostrar:
+### Algunas cosas para mostrar:
 
 ```{r}
 valor_medio_precio <- summarise(vinos, valor_medio = mean(precio,na.rm = TRUE))
 
 ```
-El valor medio de la variable precio es `r valor_medio_precio`
+El valor medio de la variable precio es __`r valor_medio_precio`__
 
 ```{r}
 desvio_std_precio <- summarise(vinos, desvio_std = sd(precio,na.rm = TRUE))
 ```
 
- El desvío estándar de la variable precio es `r desvio_std_precio`
+ El desvío estándar de la variable precio es __`r desvio_std_precio`__
 
 
--   ¿Cuál es su rango (valor máximo y valor mínimo)?
-
-```{r}
-summarise(vinos, Valor_max = max(precio,na.rm = TRUE))
-```
 
 ```{r}
-summarise(vinos, Valor_min = min(precio,na.rm = TRUE))
+valor_max_precio <- summarise(vinos, Valor_max = max(precio,na.rm = TRUE))
 ```
 
-Variable PUNTOS - ¿Cuál es su valor medio y desvío estándard?
+El valor máximo de la variable precio es __`r valor_max_precio`__
 
 ```{r}
-summarise(vinos, valor_medio = mean(puntos,na.rm = TRUE))
-
+valor_min_precio <- summarise(vinos, Valor_min = min(precio,na.rm = TRUE))
 ```
+El valor minimo de la variable precio es __`r valor_min_precio`__
+
 
 ```{r}
-summarise(vinos, desvio_std = sd(puntos,na.rm = TRUE))
-```
+valor_medio_puntos <- summarise(vinos, valor_medio = mean(puntos,na.rm = TRUE))
 
--   ¿Cuál es su rango (valor máximo y valor mínimo)?
+```
+El valor medio de la variable puntos es __`r valor_medio_puntos`__
 
 ```{r}
-summarise(vinos, 
-          Valor_max = max(puntos,na.rm = TRUE),
-          Valor_min = min(puntos,na.rm = TRUE))
+desv_std_puntos <- summarise(vinos, desvio_std = sd(puntos,na.rm = TRUE))
 ```
+El desvios estandar de la variable puntos es __`r desv_std_puntos`__
 
--   ¿Hay alguna anomalía que sugiera que hay datos incorrectos? Valores
-    imposibles (como valores negativos en una variable que sólo puede
-    ser positiva) o poco creíbles.
--   ¿Cuántas observaciones hay por cada grupo? ¿Cuántos valores
-    faltantes? ¿Hay diferencias?
 
--Cantidad de observaciones por la variable PAIS
+```{r}
+valor_max_puntos <-summarise(vinos,Valor_max = max(puntos,na.rm = TRUE))
+valor_min_puntos <-summarise(vinos,Valor_min = min(puntos,na.rm = TRUE))
+```
+El valor minimo de la variable precio es __`r valor_max_puntos`__
+
+El valor minimo de la variable precio es __`r valor_min_puntos`__
+
+
+
+
+#### Cantidad de observaciones por la variable PAIS
 
 ```{r}
 vinos|>
 group_by(pais)|>
   summarise(n=n())|>
- knitr::kable()
+ datatable()
 ```
 
--   Cantidad de observaciones por la variable NOMBRE
+#### Cantidad de observaciones por la variable NOMBRE
 
 ```{r}
 vinos|>
 group_by(nombre)|>
-  summarise(n=n())
+  summarise(n=n())|>
+  datatable()
    
 ```
 
--Cantidad de observaciones por la variable PUNTOS
+#### Cantidad de observaciones por la variable PUNTOS
 
 ```{r}
 vinos|>
 group_by(puntos)|>
   summarise(n=n())|>
-  knitr::kable()
+  datatable()
 
 ```
 
--Cantidad de observaciones por la variable PRECIO
+#### Cantidad de observaciones por la variable PRECIO
 
 ```{r}
 vinos|>
 group_by(precio)|>
 summarise(n=n())|>
-knitr::kable()
+datatable()
   
 ```
 
--Cantidad de observaciones por la variable PROVINCIA Se puede concluir
-que la provincia con mayor produccion de vinos es California
+#### Cantidad de observaciones por la variable PROVINCIA 
+
+Se puede concluir que la provincia con mayor produccion de vinos es __California__
 
 ```{r}
 vinos|>
 group_by(provincia)|>
 summarise(n=n()) |>
 arrange(desc(n))|>
-knitr::kable()
+datatable()
   
 ```
 
--Cantidad de observaciones por la variable REGION_1
+#### Cantidad de observaciones por la variable REGION_1
 
-No se puede llegar a una conclusion ya que se presentan mucho datos NA
+_Se puede observar que la variable REGION_1 presenta una gran cantidad de valores NA_
 
 ```{r}
 vinos|>
 group_by(region_1)|>
 summarise(n=n()) |>
 arrange(desc(n))|>
- knitr::kable()
+ datatable()
   
 ```
 
--Cantidad de observaciones por la variable REGION_2 No se puede llegar a
-una conclusion ya que se presentan mucho datos NA
+#### Cantidad de observaciones por la variable REGION_2 
 
+_Se puede observar que la variable REGION_2 presenta una gran cantidad de valores NA_
 ```{r}
 vinos|>
 group_by(region_2)|>
 summarise(n=n()) |>
 arrange(desc(n))|>
- knitr::kable()  
+ datatable()  
   
 ```
 
--Cantidad de observaciones por la variable VARIEDAD
+#### Cantidad de observaciones por la variable VARIEDAD
 
-La variedad de uvas mas usada para la fabricacion de vinos es la Pinot
-Noir
+La variedad de uvas mas usada para la fabricacion de vinos es la __Pinot
+Noir__
 
 ```{r}
 vinos|>
 group_by(variedad)|>
   summarise(n=n()) |>
   arrange(desc(n))|>
-   knitr::kable()
+   datatable()
   
 ```
 
--Cantidad de observaciones por la variable ViÑA
+#### Cantidad de observaciones por la variable ViÑA
 
 ```{r}
 vinos|>
 group_by(vina)|>
   summarise(n=n())|>
-  knitr::kable()
+  datatable()
 ```
 
--Cantidad de observaciones por la variable titulo_resena
+#### Cantidad de observaciones por la variable titulo_resena
 
 ```{r}
 vinos|>
 group_by(titulo_resena)|>
-  summarise(n=n())
+  summarise(n=n())|>
+  datatable()
  
   
 ```
 
-Definición valores faltantes en R,se entiende valores que debieron
+**_Definición valores faltantes en R,se entiende valores que debieron
 haberse registrado, pero no lo fueron. R almacena los valores faltantes
-como NA, lo que significa Not Available
+como NA, lo que significa Not Available_**
 
 Primero preguntamos ¿Hay valores faltantes?
 
@@ -225,14 +230,14 @@ Primero preguntamos ¿Hay valores faltantes?
 any_na(vinos) #La función any_na() por su parte, nos devuelve TRUE si hay valores faltantes
 ```
 
-Obtengo los valores faltantes de toda la tabla vinos
 
 ```{r}
-sum(is.na(vinos))
+valores_faltantes <- sum(is.na(vinos))
 
 ```
+Los cantidad de valores faltantes (NA) de la tabla vinos es __`r valores_faltantes`__
 
-Obtengo los valores faltantes para cada variable con la función apply
+Los valores faltantes para cada variable es la siguiente
 
 ```{r}
 apply(X = is.na(vinos), MARGIN = 2, FUN = sum)
@@ -242,8 +247,7 @@ apply(X = is.na(vinos), MARGIN = 2, FUN = sum)
 es en la variable 'nombre' y 'region_2'. Los datos faltantes son datos
 que deberían estar pero no fueron registrados.
 
--Cantidad de observaciones por la variable PUNTOS, ordenado de forma
-decreciente
+#### Cantidad de observaciones por la variable PUNTOS, ordenado de forma decreciente
 
 ```{r}
  vinos|>
@@ -255,17 +259,18 @@ decreciente
 
 ```
 
--   Cantidad de observaciones por PAIS, ordenado en forma decreciente
-    para saber que país tiene más observaciones.
+#### Cantidad de observaciones por PAIS, ordenado en forma decreciente para saber que país tiene más observaciones.
 
-Aqui ya podemos ver que unos de los mayores productores de vino es EEUU.
+Aqui ya podemos ver que unos de los mayores productores de vino es __EEUU__.
 
 ```{r}
 vinos|>
 group_by(pais)|>
   summarise(n=n())|>
-  arrange(desc(n))
+  arrange(desc(n))|>
+  datatable()
 ```
+
 
 ## Hipótesis
 
@@ -318,7 +323,7 @@ summarise(n= n()) |>
 filter(n>30)|>
 arrange(desc(n))
 head(vinos_pais,20)|>
- knitr::kable()
+datatable()
 ```
 
 ```{r}
@@ -357,8 +362,8 @@ ggplot(EEUU_Francia_Italia, mapping= aes(pais,puntos, fill=pais))+
 
 ```
 
-Es interesante notar que tanto Italia como EEUU tienen medias más altas
+**_Es interesante notar que tanto Italia como EEUU tienen medias más altas
 que las medianas, lo que significa que tienen unos pocos vinos selectos
 excepcionales, mientras que Francia tiene casi exactamente la misma
 mediana y media, las cuales son más altas que Italia y EEUU, lo que
-significa que Francia posee vinos de mejor calidad (puntuación).
+significa que Francia posee vinos de mejor calidad (puntuación)._**
